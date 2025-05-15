@@ -1,7 +1,10 @@
+import org.junit.Test;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class DivisionTest {
+
     private boolean areDoublesEqual(double a, double b, double epsilon) {
 
         return Math.abs(a - b) <= epsilon;

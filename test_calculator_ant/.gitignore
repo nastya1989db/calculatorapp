@@ -27,8 +27,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-lib/
 build/
-jar/
 reports/
-out/
+lib/
+jar/
