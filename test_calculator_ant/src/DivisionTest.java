@@ -2,15 +2,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class DivisionTest {
-    public static void main(String[] args) {
-        DivisionTest test = new DivisionTest();
-        test.divisionTest();
-    }
     private boolean areDoublesEqual(double a, double b, double epsilon) {
 
         return Math.abs(a - b) <= epsilon;
     }
-
+@Test
     public void divisionTest() {
         double dividend = 35.0;     // Дивиденд (делимое)
         double divisor = 7.0;       // Делитель

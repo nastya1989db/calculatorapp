@@ -1,16 +1,12 @@
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MultiplicationTest{
-    public static void main(String[] args) {
-        MultiplicationTest t = new MultiplicationTest();
-        t.multiplicationTest();
-    }
 
     // Проверка равенства двух double значений с заданной точностью
     private boolean areDoublesEqual(double a, double b, double epsilon) {
         return Math.abs(a - b) <= epsilon;
     }
-
+@Test
     public void multiplicationTest() {
         double value1 = 15.0 * 2.0;
         double value2 = 30.0;
