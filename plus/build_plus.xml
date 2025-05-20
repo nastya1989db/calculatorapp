@@ -1,0 +1,56 @@
+<?xml version ="1.0"?>
+<project basedir="." default="test" name="calc_part_arina">
+    <description>A simple Java project</description>
+    <property name="srcDir" location="src"/>
+    <property name="buildDir" location="build"/>
+    <property name="jarDir" location="jar"/>
+    <property name="reportDir" location="report"/>
+    <property name="libDir" location="lib"/><!--junit.jar-->
+    <path id="classpath">
+        <fileset dir="${libDir}" includes="**/*.jar"/>
+        <pathelement location="${buildDir}"/>
+    </path>
+
+
+    <target name="clean">
+        <delete dir="${buildDir}"/>
+        <delete dir="${jarDir}"/>
+        <delete dir="${reportDir}"/>
+
+    </target>
+
+    <target name="init" depends="clean">
+        <mkdir dir="${buildDir}"/>
+        <mkdir dir="${jarDir}"/>
+        <mkdir dir="${reportDir}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${srcDir}"
+               destdir="${buildDir}" classpathref="classpath" fork="true" executable="/Users/nastik/.sdkman/candidates/java/current/bin/javac">
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="${jarDir}/CalculatorSum.jar" basedir="${buildDir}">
+            <manifest>
+                <!--<attribute name="Built-by" value="${user.name}"/>-->
+                <attribute name="Main-Class" value="CalculatorSum"/>
+            </manifest>
+        </jar>
+</target>
+ <target name="test" depends="jar" >
+        <junit printsummary="yes" haltonfailure="no">
+            <formatter type="xml" />
+            <formatter type="plain" />
+            <batchtest fork="yes" todir="${reportDir}">
+                <fileset dir="${srcDir}">
+                    <include name="**/*CalcSumTest*.java" />
+                </fileset>
+            </batchtest>
+            <classpath refid="classpath"/>
+        </junit>
+    </target>
+
+</project>
+

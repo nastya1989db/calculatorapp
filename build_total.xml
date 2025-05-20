@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Calc" basedir="." default="compile">
+
+    <!-- Определяем пути к исходникам и бинарному каталогу -->
+    <property name="srcDir" value="src"/>
+    <property name="buildDir" value="build"/>
+    <property name="jarDir" value="jar"/>
+    <property name="libDir" value="lib"/>
+
+    <!-- Очищаем предыдущий бинарник -->
+    <target name="clean">
+	    <delete dir="${buildDir}" />
+	    <delete dir="${jarDir}" />
+    </target>
+
+    <!-- Создаем директорию для бинарников -->
+    <target name="init">
+	    <mkdir dir="${buildDir}" />
+	    <mkdir dir="${jarDir}" />
+    </target>
+
+    <!-- Компилируем весь код -->
+    <target name="compile" depends="init">
+	    <javac destdir="${buildDir}" includeantruntime="false" classpath="${libDir}/*.jar" fork="true" executable="/home/ubuntu/.sdkman/candidates/java/current/bin/javac" debug="true">
+            <src path="${srcDir}/other"/>
+	    <src path="${srcDir}/minus"/>
+            <src path="${srcDir}/plus"/>
+        </javac>
+    </target>
+
+</project>
