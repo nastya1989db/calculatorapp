@@ -4,8 +4,9 @@
 </description>
 	<property name="srcDir" location="src"/>
 	<property name="buildDir" location="build"/>
-	<property name="jarDir" location="jar"/>
+	<property name="jarDir" location="../other/jarAll"/>
 	<property name="reportDir" location="report"/>
+	<property name="nameJar" value="CalculatorMinus.jar"/>
     <property name="libDir" location="lib"/>
     <path id="classpath">
         <fileset dir="${libDir}" includes="**/*.jar"/>
@@ -14,7 +15,7 @@
 
 <target name="clean">
         <delete dir="${buildDir}"/>
-	    <delete dir="${jarDir}"/>
+	<delete dir="${jarDir}/${nameJar}"/>
     <delete dir="${reportDir}"/>
 
 </target>
@@ -33,7 +34,7 @@
 </target>
 
 <target name="jar" depends="compile">
-    <jar destfile="${jarDir}/CalculatorMinus.jar" basedir="${buildDir}">
+	<jar destfile="${jarDir}/${nameJar}" basedir="${buildDir}">
     <manifest>
             <!--attribute name="Built-by" value="${user.name}"/-->
             <attribute name="Main-Class" value="CalculatorMinus"/>

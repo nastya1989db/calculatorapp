@@ -3,9 +3,10 @@
     <description>A simple Java project</description>
     <property name="srcDir" location="src"/>
     <property name="buildDir" location="build"/>
-    <property name="jarDir" location="jar"/>
+    <property name="jarDir" location="../other/jarAll"/>
     <property name="reportDir" location="report"/>
     <property name="libDir" location="lib"/><!--junit.jar-->
+    <property name="nameJar" value="CalculatorSum.jar"/>
     <path id="classpath">
         <fileset dir="${libDir}" includes="**/*.jar"/>
         <pathelement location="${buildDir}"/>
@@ -14,7 +15,7 @@
 
     <target name="clean">
         <delete dir="${buildDir}"/>
-        <delete dir="${jarDir}"/>
+	<delete dir="${jarDir}/${nameJar}"/>
         <delete dir="${reportDir}"/>
 
     </target>
@@ -32,7 +33,7 @@
     </target>
 
     <target name="jar" depends="compile">
-        <jar destfile="${jarDir}/CalculatorSum.jar" basedir="${buildDir}">
+	    <jar destfile="${jarDir}/${nameJar}" basedir="${buildDir}">
             <manifest>
                 <!--<attribute name="Built-by" value="${user.name}"/>-->
                 <attribute name="Main-Class" value="CalculatorSum"/>

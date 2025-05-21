@@ -3,18 +3,19 @@
     <description>A simple Java project</description>
     <property name="srcDir" location="src"/>
     <property name="buildDir" location="build"/>
-    <property name="jarDir" location="jar"/>
+    <property name="jarDir" location="jarAll"/>
     <property name="reportsDir" location="reports"/>
     <property name="libDir" location="lib"/><!--junit.jar-->
+    <property name="nameJar" value="Main.jar"/>
     <path id="classpath">
-        <fileset dir="${libDir}" includes="**/*.jar"/>
+	<fileset dir="${libDir}" includes="**/*.jar"/>
+	<fileset dir="${jarDir}" includes="**/*.jar"/>
         <pathelement location="${buildDir}"/>
     </path>
 
-
     <target name="clean">
         <delete dir="${buildDir}"/>
-        <delete dir="${jarDir}"/>
+	<delete dir="${jarDir}/${nameJar}"/>
         <delete dir="${reportsDir}"/>
     
     </target>
@@ -26,13 +27,12 @@
     </target>
 
     <target name="compile" depends="init">
-        <javac srcdir="${srcDir}"
-               destdir="${buildDir}" classpathref="classpath" fork="true" executable="/home/ubuntu/.sdkman/candidates/java/current/bin/javac">
+	    <javac srcdir="${srcDir}" destdir="${buildDir}"  classpathref="classpath" fork="true" executable="/home/ubuntu/.sdkman/candidates/java/current/bin/javac">
         </javac>
     </target> 
 
     <target name="jar" depends="compile">
-<jar destfile="${jarDir}/Main.jar" basedir="${buildDir}">
+	    <jar destfile="${jarDir}/${nameJar}" basedir="${buildDir}">
     <manifest>
         <!--<attribute name="Built-by" value="${user.name}"/>-->
         <attribute name="Main-Class" value="Main"/>
