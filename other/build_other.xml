@@ -27,7 +27,7 @@
     </target>
 
     <target name="compile" depends="init">
-	    <javac srcdir="${srcDir}" destdir="${buildDir}"  classpathref="classpath" fork="true" executable="/home/ubuntu/.sdkman/candidates/java/current/bin/javac">
+	    <javac srcdir="${srcDir}" destdir="${buildDir}"  classpathref="classpath" fork="true">
         </javac>
     </target> 
 
