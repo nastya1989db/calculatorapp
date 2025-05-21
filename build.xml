@@ -1,0 +1,53 @@
+<?xml version ="1.0" ?>
+<project basedir="." default="test" name="myFirstCalcDivision">
+    <property name="srcDir" location="src"/>
+    <property name="buildDir" location="build"/>
+    <property name="jarDir" location="jar"/>
+    <property name="reportsDir" location="reports"/>
+    <property name="libDir" location="lib"/>
+    <path id="classpath">
+        <fileset dir="${libDir}" includes="**/*.jar"/>
+	<pathelement location="${buildDir}"/>
+    </path>
+
+
+    <target name="clean">
+	    <delete dir="${buildDir}"/>
+	    <delete dir="${jarDir}"/>
+	    <delete dir="${reportsDir}"/>
+
+    </target>
+
+    <target name="init" depends="clean">
+	    <mkdir dir="${buildDir}"/>
+	    <mkdir dir="${jarDir}"/>
+	    <mkdir dir="${reportsDir}"/>
+
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${srcDir}"
+               destdir="${buildDir}" classpathref="classpath" fork="true" executable="/home/eugene/.sdkman/candidates/java/current/bin/javac"/>
+    </target>
+
+    <target name="jar" depends="compile">
+	    <jar destfile="${jarDir}/CalcDivision.jar" basedir="${buildDir}">
+            <manifest>
+                <attribute name="Main-Class" value="CalcDivision"/>
+            </manifest>
+        </jar>
+    </target>
+    <target name="test" depends="jar">
+        <junit printsummary="yes" haltonfailure="no">
+            <formatter type="xml"/>
+            <formatter type="plain"/>
+	    <batchtest fork="yes" todir="${reportsDir}">
+                <fileset dir="${srcDir}">
+                    <include name="**/*TestCalcDivision*.java"/>
+                </fileset>
+            </batchtest>
+            <classpath refid="classpath"/>
+        </junit>
+    </target>
+
+</project>
