@@ -1,0 +1,56 @@
+<?xml version ="1.0"?> 
+        <project basedir="." default="test" name="Calculator3"> 
+    <description>A simple Java project</description> 
+    <property name="srcDir" location="src"/> 
+    <property name="buildDir" location="build"/> 
+    <property name="jarDir" location="jarAll"/> 
+    <property name="reportsDir" location="reports"/> 
+    <property name="libDir" location="lib"/><!--junit.jar--> 
+    <property name="nameJar" value="Main.jar"/> 
+    <path id="classpath"> 
+ <fileset dir="${libDir}" includes="**/*.jar"/> 
+ <fileset dir="${jarDir}" includes="**/*.jar"/> 
+        <pathelement location="${buildDir}"/> 
+    </path> 
+ 
+    <target name="clean"> 
+        <delete dir="${buildDir}"/> 
+ <delete dir="${jarDir}/${nameJar}"/> 
+        <delete dir="${reportsDir}"/> 
+     
+    </target> 
+ 
+    <target name="init" depends="clean"> 
+        <mkdir dir="${buildDir}"/> 
+        <mkdir dir="${jarDir}"/> 
+        <mkdir dir="${reportsDir}"/> 
+    </target> 
+ 
+    <target name="compile" depends="init"> 
+     <javac srcdir="${srcDir}" destdir="${buildDir}"  classpathref="classpath" fork="true"> 
+        </javac> 
+    </target>  
+ 
+    <target name="jar" depends="compile"> 
+     <jar destfile="${jarDir}/${nameJar}" basedir="${buildDir}"> 
+    <manifest> 
+        <!--<attribute name="Built-by" value="${user.name}"/>--> 
+        <attribute name="Main-Class" value="Main"/> 
+    </manifest> 
+</jar> 
+</target> 
+<target name="test" depends="jar" > 
+    <junit printsummary="yes" haltonfailure="no"> 
+        <formatter type="xml" /> 
+        <formatter type="plain" /> 
+        <batchtest fork="yes" todir="${reportsDir}"> 
+            <fileset dir="${srcDir}"> 
+                <include name="**/*DivisionTest*.java" /> 
+                <include name="**/*MultiplicationTest*.java" />
+<include name="**/*CalcTest*.java" /> 
+            </fileset> 
+        </batchtest> 
+            <classpath refid="classpath"/> 
+    </junit> 
+    </target> 
+</project>
