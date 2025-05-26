@@ -20,10 +20,4 @@ RUN ant -f calculatorapp/other/build_other.xml
 
 CMD ["java", "-cp", "Main.jar:/app/calculatorapp/other/jarAll/CalculatorMinus.jar:/app/calculatorapp/other/jarAll/CalculatorSum.jar:/app/calculatorapp/other/build", "Main"]
 
-#COPY build.xml /app/mytest2/
-#COPY src/* /app/mytest2/src/
-#COPY lib/* /app/mytest2/lib/
 
-#RUN ant
-#CMD ["bash"]
-#CMD [ "java", "-cp", "Test2.jar:/app/mytest2/lib/Test1.jar:/app/mytest2/build", "Test2"]
